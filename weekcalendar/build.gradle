@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0.1"
+        versionCode 9
+        versionName "1.0"
     }
     buildTypes {
         release {
@@ -28,8 +28,8 @@ dependencies {
     compile 'com.squareup:otto:1.3.8'
 }
 
-group = 'noman.weekcalendar'
-version = '1.0.6'
+/*group = 'noman.weekcalendar'
+version = '1.0.7'
 
 task generateSourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
@@ -56,10 +56,10 @@ bintray {
         name = 'weekcalendar'
 
         version {
-            name = '1.0.6'
+            name = '1.0.7'
             desc = 'WeekCalendar'
             released  = new Date()
-            vcsTag = '1.0.6'
+            vcsTag = '1.0.7'
         }
 
         licenses = ['Apache-2.0']
@@ -67,9 +67,10 @@ bintray {
         websiteUrl = 'https://github.com/nomanr/WeekCalendar'
     }
     configurations = ['archives']
-}
+}*/
 
+/*
 artifacts {
     archives generateJavaDocsJar
     archives generateSourcesJar
-}
+}*/
