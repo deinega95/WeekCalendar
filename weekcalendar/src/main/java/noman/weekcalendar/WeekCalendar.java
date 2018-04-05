@@ -96,6 +96,15 @@ public class WeekCalendar extends LinearLayout {
 
     }
 
+
+    public void setHuinya(){
+
+}
+
+    public void setDisabaleDate(List<String> dates){
+
+    }
+
     /***
      * Do not use this method
      * this is for receiving date,
