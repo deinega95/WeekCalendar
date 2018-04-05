@@ -92,6 +92,9 @@ public class WeekFragment extends Fragment {
         }
     }
 
+    public void setHuinya(){
+
+    }
 
     @Subscribe
     public void invalidate(Event.InvalidateEvent event) {
