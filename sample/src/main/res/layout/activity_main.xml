@@ -11,11 +11,19 @@
     <noman.weekcalendar.WeekCalendar
         android:id="@+id/weekCalendar"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="@color/colorPrimary"
-        app:dayNameLength="threeLetters"
-        app:numOfPages="150"
-        />
+        app:daysTextColor="#000"
+        app:selectedBgColor="#5b70f6"
+        app:weekTextColor="#6f6f6f"
+        app:weekTextSize="12sp"
+        app:todaysDateBgColor="#FFF"
+        app:todaysDateTextColor="#5b70f6"
+
+        app:weekBackgroundColor="#FFF"
+        app:daysBackgroundColor="#FFF"
+        android:background="#FFF"
+        app:daysTextSize="16sp"
+        app:disableDateTextColor="#969696"
+        android:layout_height="65dp"/>
 
     <LinearLayout
         android:id="@+id/linearLayout"

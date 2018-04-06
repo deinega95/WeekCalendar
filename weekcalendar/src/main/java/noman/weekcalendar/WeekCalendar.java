@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.squareup.otto.Subscribe;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class WeekCalendar extends LinearLayout {
     private GridView daysName;
     private DayDecorator dayDecorator;
     private OnWeekChangeListener onWeekChangeListener;
+    private List<LocalDate> datesDisable;
 
 
     public WeekCalendar(Context context) {
@@ -77,12 +79,22 @@ public class WeekCalendar extends LinearLayout {
                     .WeekCalendar_daysTextSize, -1);
             int todayDateTextColor = typedArray.getColor(R.styleable
                     .WeekCalendar_todaysDateTextColor, ContextCompat.getColor(getContext(), android.R.color.white));
+
+            int selectedTextColor = typedArray.getColor(R.styleable
+                    .WeekCalendar_selectedTextColor, ContextCompat.getColor(getContext(), android.R.color.white));
+
+            int disableDateTextColor = typedArray.getColor(R.styleable
+                    .WeekCalendar_disableDateTextColor, ContextCompat.getColor(getContext(), android.R.color.white));
+
             setDayDecorator(new DefaultDayDecorator(getContext(),
                     selectedDateColor,
                     todayDateColor,
                     todayDateTextColor,
                     daysTextColor,
-                    daysTextSize));
+                    selectedTextColor,
+                    daysTextSize,
+                    disableDateTextColor
+                   ));
         }
         setOrientation(VERTICAL);
 
@@ -97,12 +109,9 @@ public class WeekCalendar extends LinearLayout {
     }
 
 
-    public void setHuinya(){
 
-}
-
-    public void setDisabaleDate(List<String> dates){
-
+    public void setDisabaleDate(List<LocalDate> datesDisable){
+       this.datesDisable = datesDisable;
     }
 
     /***
@@ -120,7 +129,7 @@ public class WeekCalendar extends LinearLayout {
     public void onDayDecorate(Event.OnDayDecorateEvent event) {
         if (dayDecorator != null) {
             dayDecorator.decorate(event.getView(), event.getDayTextView(), event.getDateTime(),
-                    event.getFirstDay(), event.getSelectedDateTime());
+                    event.getFirstDay(), event.getSelectedDateTime(), datesDisable);
         }
     }
 

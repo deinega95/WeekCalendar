@@ -12,6 +12,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import noman.weekcalendar.WeekCalendar;
 import noman.weekcalendar.listener.OnDateClickListener;
@@ -53,6 +57,16 @@ public class MainActivity extends AppCompatActivity {
                         " Forward: " + forward, Toast.LENGTH_SHORT).show();
             }
         });
+
+        List<LocalDate> dates = new ArrayList<>();
+        LocalDate one = new DateTime().toLocalDate();
+
+        dates.add(one);
+        dates.add(one.plusDays(4));
+        dates.add(one.plusDays(10));
+        dates.add(one.minusDays(2));
+
+        weekCalendar.setDisabaleDate(dates);
     }
 
     @Override

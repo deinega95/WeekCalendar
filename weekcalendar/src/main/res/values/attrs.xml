@@ -9,6 +9,8 @@
         <attr name="weekTextColor" format="color"/>
         <attr name="weekBackgroundColor" format="color"/>
         <attr name="selectedBgColor" format="color"/>
+        <attr name="selectedTextColor" format="color"/>
+        <attr name="disableDateTextColor" format="color"/>
         <attr name="todaysDateBgColor" format="color"/>
         <attr name="dayNameLength">
             <enum name="singleLetter" value="0"/>

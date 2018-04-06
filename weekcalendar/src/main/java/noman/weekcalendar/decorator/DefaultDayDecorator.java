@@ -15,6 +15,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import noman.weekcalendar.R;
 import noman.weekcalendar.fragment.WeekFragment;
@@ -29,6 +33,8 @@ public class DefaultDayDecorator implements DayDecorator {
     private final int todayDateColor;
     private int todayDateTextColor;
     private int textColor;
+    private int selectedTextColor;
+    private int disableDateTextColor;
     private float textSize;
 
     public DefaultDayDecorator(Context context,
@@ -36,28 +42,32 @@ public class DefaultDayDecorator implements DayDecorator {
                                @ColorInt int todayDateColor,
                                @ColorInt int todayDateTextColor,
                                @ColorInt int textColor,
-                               float textSize) {
+                               @ColorInt int selectedTextColor,
+                               float textSize,
+
+                               @ColorInt int disableDateTextColor) {
         this.context = context;
         this.selectedDateColor = selectedDateColor;
         this.todayDateColor = todayDateColor;
         this.todayDateTextColor = todayDateTextColor;
         this.textColor = textColor;
         this.textSize = textSize;
+        this.selectedTextColor = selectedTextColor;
+        this.disableDateTextColor = disableDateTextColor;
+        //this.disableDates = disableDates;
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+/*    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void decorate(View view, TextView dayTextView,
                          DateTime dateTime, DateTime firstDayOfTheWeek, DateTime selectedDateTime) {
-        //DateTime dt = new DateTime();
 
         Drawable holoCircle = ContextCompat.getDrawable(context, R.drawable.holo_circle);
         Drawable solidCircle = ContextCompat.getDrawable(context, R.drawable.solid_circle);
 
         holoCircle.setColorFilter(selectedDateColor, PorterDuff.Mode.SRC_ATOP);
         solidCircle.setColorFilter(todayDateColor, PorterDuff.Mode.SRC_ATOP);
-        // solidCircle.mutate().setAlpha(200);
-        //holoCircle.mutate().setAlpha(200);
+
 
 
         if (firstDayOfTheWeek.getMonthOfYear() < dateTime.getMonthOfYear()
@@ -66,14 +76,52 @@ public class DefaultDayDecorator implements DayDecorator {
 
         DateTime calendarStartDate = WeekFragment.CalendarStartDate;
 
+        if (dateTime.toLocalDate().equals(calendarStartDate.toLocalDate())) {
+            dayTextView.setBackground(solidCircle);
+            dayTextView.setTextColor(this.todayDateTextColor);
+        } else {
+            dayTextView.setTextColor(textColor);
+        }
+
         if (selectedDateTime != null) {
             if (selectedDateTime.toLocalDate().equals(dateTime.toLocalDate())) {
-                if (!selectedDateTime.toLocalDate().equals(calendarStartDate.toLocalDate()))
-                    dayTextView.setBackground(holoCircle);
+                if (!selectedDateTime.toLocalDate().equals(calendarStartDate.toLocalDate())) {
+                    dayTextView.setTextColor(selectedTextColor);
+                }
+
+                dayTextView.setBackground(holoCircle);
+                dayTextView.setTextColor(selectedTextColor);
             } else {
+
+               //
                 dayTextView.setBackground(null);
             }
+
         }
+
+
+
+        float size = textSize;
+        if (size == -1)
+            size = dayTextView.getTextSize();
+        dayTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
+    }*/
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void decorate(View view, TextView dayTextView, DateTime dateTime, DateTime firstDayOfTheWeek, DateTime selectedDateTime, List<LocalDate> disableDates) {
+        Drawable holoCircle = ContextCompat.getDrawable(context, R.drawable.holo_circle);
+        Drawable solidCircle = ContextCompat.getDrawable(context, R.drawable.solid_circle);
+
+        holoCircle.setColorFilter(selectedDateColor, PorterDuff.Mode.SRC_ATOP);
+        solidCircle.setColorFilter(todayDateColor, PorterDuff.Mode.SRC_ATOP);
+
+
+
+        if (firstDayOfTheWeek.getMonthOfYear() < dateTime.getMonthOfYear()
+                || firstDayOfTheWeek.getYear() < dateTime.getYear())
+            dayTextView.setTextColor(Color.GRAY);
+
+        DateTime calendarStartDate = WeekFragment.CalendarStartDate;
 
         if (dateTime.toLocalDate().equals(calendarStartDate.toLocalDate())) {
             dayTextView.setBackground(solidCircle);
@@ -81,6 +129,27 @@ public class DefaultDayDecorator implements DayDecorator {
         } else {
             dayTextView.setTextColor(textColor);
         }
+    if (disableDates != null) {
+        if (disableDates.contains(dateTime.toLocalDate())) {
+            dayTextView.setBackground(null);
+            dayTextView.setTextColor(disableDateTextColor);
+        }
+    }
+        if (selectedDateTime != null) {
+            if (selectedDateTime.toLocalDate().equals(dateTime.toLocalDate())) {
+                if (!selectedDateTime.toLocalDate().equals(calendarStartDate.toLocalDate())) {
+                    dayTextView.setTextColor(selectedTextColor);
+                }
+
+                dayTextView.setBackground(holoCircle);
+                dayTextView.setTextColor(selectedTextColor);
+            } else {
+                dayTextView.setBackground(null);
+            }
+
+        }
+
+
         float size = textSize;
         if (size == -1)
             size = dayTextView.getTextSize();
