@@ -135,6 +135,11 @@ public class DefaultDayDecorator implements DayDecorator {
             dayTextView.setTextColor(disableDateTextColor);
         }
     }
+
+    if (dateTime.toLocalDate().equals(calendarStartDate.toLocalDate())){
+        dayTextView.setTextColor(this.todayDateTextColor);
+    }
+
         if (selectedDateTime != null) {
             if (selectedDateTime.toLocalDate().equals(dateTime.toLocalDate())) {
                 if (!selectedDateTime.toLocalDate().equals(calendarStartDate.toLocalDate())) {
